@@ -12,6 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#import <AVFoundation/AVFoundation.h>
 #import "YTPlayerView.h"
 
 // These are instances of NSString because we get them from parsing a URL. It would be silly to
@@ -669,6 +670,8 @@ NSString static *const kYTPlayerSyndicationRegexPattern = @"^https://tpc.googles
  * @return YES if successful, NO if not.
  */
 - (BOOL)loadWithPlayerParams:(NSDictionary *)additionalPlayerParams {
+  [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error: nil];
+  
   NSDictionary *playerCallbacks = @{
         @"onReady" : @"onReady",
         @"onStateChange" : @"onStateChange",
